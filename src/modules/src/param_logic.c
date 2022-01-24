@@ -363,7 +363,13 @@ void paramWriteProcess(CRTPPacket *p)
   if (params[index].type & PARAM_RONLY)
     return;
 
+  DEBUG_PRINT("writing %u value\n", *((uint8_t *) valptr));
   paramSet(index, valptr);
+
+  uint8_t data = 255;
+  paramGet(index, &data);
+  DEBUG_PRINT("reading back %u value\n", data);
+
 
   crtpSendPacketBlock(p);
 
@@ -678,6 +684,10 @@ void paramPersistentStore(CRTPPacket *p)
     crtpSendPacketBlock(p);
     return;
   }
+
+  uint8_t data = 255;
+  paramGet(index, &data);
+  DEBUG_PRINT("Value to store should be %u\n", data);
 
   char key[KEY_LEN] = {0};
   generateStorageKey(index, key);
