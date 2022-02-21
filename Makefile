@@ -98,6 +98,13 @@ else
 ARCH_CFLAGS += -Os -Werror
 endif
 
+# Custom CFLAGS for enableing LED deck and mass configuration
+
+## Weight of the Crazyflie, including decks. The default setting is a Crazyflie 2.X without decks.
+ARCH_CFLAGS += -DCF_MASS=0.048f
+## Set the default LED Ring effect (if not set, effect 6 will be used)
+ARCH_CFLAGS += -DLEDRING_DEFAULT_EFFECT=0
+
 _all:
 
 all: $(PROG).hex $(PROG).bin
