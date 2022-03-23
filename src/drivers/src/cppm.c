@@ -54,13 +54,13 @@
   #define CPPM_GPIO_PORT               GPIOB
   #define CPPM_GPIO_PIN                GPIO_Pin_5
   #define CPPM_GPIO_SOURCE             GPIO_PinSource5
-#elif defined(CPPM_USE_PB8)
-  #define CPPM_TIMER_NUMBER            10
+#elif defined(CPPM_USE_PA7)
+  #define CPPM_TIMER_NUMBER            14
   #define CPPM_TIMER_CHANNEL           1
-  #define CPPM_GPIO_RCC                RCC_AHB1Periph_GPIOB
-  #define CPPM_GPIO_PORT               GPIOB
-  #define CPPM_GPIO_PIN                GPIO_Pin_8
-  #define CPPM_GPIO_SOURCE             GPIO_PinSource8
+  #define CPPM_GPIO_RCC                RCC_AHB1Periph_GPIOA
+  #define CPPM_GPIO_PORT               GPIOA
+  #define CPPM_GPIO_PIN                GPIO_Pin_7
+  #define CPPM_GPIO_SOURCE             GPIO_PinSource7
 #elif defined(CPPM_USE_PA2)
   #define CPPM_TIMER_NUMBER            9
   #define CPPM_TIMER_CHANNEL           1
@@ -75,13 +75,13 @@
   #define CPPM_GPIO_PORT               GPIOA
   #define CPPM_GPIO_PIN                GPIO_Pin_3
   #define CPPM_GPIO_SOURCE             GPIO_PinSource3
-#else // default is PA7 
-  #define CPPM_TIMER_NUMBER            14
+#else // default is PB8
+  #define CPPM_TIMER_NUMBER            10
   #define CPPM_TIMER_CHANNEL           1
-  #define CPPM_GPIO_RCC                RCC_AHB1Periph_GPIOA
-  #define CPPM_GPIO_PORT               GPIOA
-  #define CPPM_GPIO_PIN                GPIO_Pin_7
-  #define CPPM_GPIO_SOURCE             GPIO_PinSource7
+  #define CPPM_GPIO_RCC                RCC_AHB1Periph_GPIOB
+  #define CPPM_GPIO_PORT               GPIOB
+  #define CPPM_GPIO_PIN                GPIO_Pin_8
+  #define CPPM_GPIO_SOURCE             GPIO_PinSource8
 #endif
 
 #define CPPM_MIN_PPM_USEC            1100

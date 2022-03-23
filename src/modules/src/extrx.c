@@ -88,6 +88,8 @@
 bool extRxArm = false;
 bool extRxAltHold = false;
   
+#define EXTRX_ARMING true // modded
+#define EXTRX_ALT_HOLD true // modded
 #ifndef EXTRX_ARMING
   #define EXTRX_ARMING    false
 #endif
