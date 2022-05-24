@@ -72,7 +72,7 @@
 #include "i2cdev.h"
 #include "autoconf.h"
 
-#ifndef START_DISARMED
+#ifndef CONFIG_MOTORS_START_DISARMED
 #define ARM_INIT true
 #else
 #define ARM_INIT false
@@ -82,6 +82,7 @@
 static bool selftestPassed;
 static bool armed = ARM_INIT;
 static bool forceArm;
+static uint8_t dumpAssertInfo = 0;
 static bool isInit;
 
 static char nrf_version[16];
@@ -171,11 +172,8 @@ void systemTask(void *arg)
   queueMonitorInit();
 #endif
 
-#ifdef ENABLE_UART1
-  uart1Init(9600);
-#endif
-#ifdef ENABLE_UART2
-  uart2Init(115200);
+#ifdef CONFIG_DEBUG_PRINT_ON_UART1
+  uart1Init(115200);
 #endif
 
   initUsecTimer();
@@ -365,12 +363,12 @@ void systemSyslinkReceive(SyslinkPacket *slp)
 {
   if (slp->type == SYSLINK_SYS_NRF_VERSION)
   {
-    size_t len = slp->length - 2;
+    size_t len = slp->length - 1;
 
     if (sizeof(nrf_version) - 1 <=  len) {
       len = sizeof(nrf_version) - 1;
     }
-    memcpy(&nrf_version, &slp->data[0], len);
+    memcpy(&nrf_version, &slp->data[0], len );
     DEBUG_PRINT("NRF51 version: %s\n", nrf_version);
   }
 }
@@ -385,6 +383,11 @@ void vApplicationIdleHook( void )
   {
     tickOfLatestWatchdogReset = tickCount;
     watchdogReset();
+  }
+
+  if (dumpAssertInfo != 0) {
+    printAssertSnapshotData();
+    dumpAssertInfo = 0;
   }
 
   // Enter sleep mode. Does not work when debugging chip with SWD.
@@ -436,7 +439,12 @@ PARAM_ADD_CORE(PARAM_INT8 | PARAM_RONLY, selftestPassed, &selftestPassed)
  */
 PARAM_ADD(PARAM_INT8 | PARAM_PERSISTENT, forceArm, &forceArm)
 
-PARAM_GROUP_STOP(sytem)
+/**
+ * @brief Set to nonzero to trigger dump of assert information to the log.
+ */
+PARAM_ADD(PARAM_UINT8, assertInfo, &dumpAssertInfo)
+
+PARAM_GROUP_STOP(system)
 
 /**
  *  System loggable variables to check different system states.

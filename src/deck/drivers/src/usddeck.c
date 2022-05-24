@@ -63,8 +63,10 @@
 #include "mem.h"
 #include "eventtrigger.h"
 
+#include "autoconf.h"
+
 // Hardware defines
-#ifdef USDDECK_USE_ALT_PINS_AND_SPI
+#ifdef CONFIG_DECK_USD_USE_ALT_PINS_AND_SPI
 #include "deck_spi3.h"
 #define USD_CS_PIN    DECK_GPIO_RX2
 
@@ -409,6 +411,7 @@ TCHAR* f_gets_without_comments (
   TCHAR c, *p = buff;
   UINT rc;
   bool isComment = false;
+  bool isPureComment = false;
 
   while (n < len - 1) { /* Read characters until buffer gets filled */
     f_read(fp, &c, 1, &rc);
@@ -416,6 +419,11 @@ TCHAR* f_gets_without_comments (
       break;
     }
     if (c == '\n') {
+      if (isPureComment){
+        isComment = false;
+        isPureComment = false;
+        continue;
+      }      
       break;   /* Break on EOL */
     }
     if (isspace((int)c)) {
@@ -423,6 +431,9 @@ TCHAR* f_gets_without_comments (
     }
     if (c == '#') {
       isComment = true; /* keep reading until end of line */
+      if (n==0){
+        isPureComment = true;
+      }
     }
     if (!isComment) {
       *p++ = c;

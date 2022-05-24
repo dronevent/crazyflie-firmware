@@ -1,9 +1,12 @@
-menu "IMU sensor configuration"
+menu "Power management configuration"
 
-config SENSORS_BMI088_BMP388
-    bool "Support for bmi088 and bmp388 sensors"
+config PM_AUTO_SHUTDOWN
+    bool "Enable automatic shutdown"
+    default n
     help
-      Include support for the Bosch bmi088 inertial and bmp388
-      barometric sensors
+        The power management subsystem can automatically shutdown the system.
+        The shutdown time in minutes is defined in platform_defaults_* for
+        the specific platform and is the time since the last radio communication
+        occured.
 
 endmenu

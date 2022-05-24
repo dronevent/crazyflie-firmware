@@ -26,10 +26,18 @@ Each platform supports one or more device types. The device type is identified i
 to fit the hardware. The Crazyflie 2.0 and Crazyflie 2.1 are for instance two device types handled by the `cf2` platform,
 they will configure the firmware to use different drivers for the IMU based on the device type.
 
+## Persistent paramters
+While KBuild is ment for configuring the compile time specific functionality selections the 
+[persistent paramters](/docs/userguides/logparam.md#persistent-parameters) are there to configure it in run time. 
+And this is the rule of thumb. If it is about a configuration, such as PID tuning or low voltage level, it should 
+be a persistent parameter. If it is a functionality it should be a compile time KBuild define. It is not a sharp cut, 
+do what is best and easiest for the user.
+
 ## Default values
 
 There is functionality to set default values for variables based on the platform and this is for instance used to set
-different default tuning values for the (small) Crazyflie 2.1 and the (larger) Crazyflie Bolt.
+different default tuning values for the (small) Crazyflie 2.1 and the (larger) Crazyflie Bolt. The default values are 
+located in e.g. `src/platform/interface/platform_default_cf2.h` for the Crazyflie 2.1.
 
 ## Implementation
 
@@ -46,3 +54,6 @@ An identifier is stored in the physical hardware of each device, which is ued to
 | bolt     | Crazyflie Bolt 1.0 (CB10)                   |
 | tag      | Roadrunner 1.0 (RR10)                       |
 |----------|---------------------------------------------|
+
+## Creating your own platform
+It is possible to create your own platform! To do so follow the guide in the [development docs](/docs/development/create_platform).

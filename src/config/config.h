@@ -100,7 +100,7 @@
 #define SYSLINK_TASK_PRI        3
 #define USBLINK_TASK_PRI        3
 #define ACTIVE_MARKER_TASK_PRI  3
-#define AI_DECK_TASK_PRI        3
+#define AI_DECK_TASK_PRI        1
 #define UART2_TASK_PRI          3
 #define CRTP_SRV_TASK_PRI       0
 #define PLATFORM_SRV_TASK_PRI   0
@@ -209,12 +209,6 @@
  * fairly constant over the battery voltage range but testing with fully changed battery is best.
  */
 #define BAT_LOADING_SAG_THRESHOLD  0.95f
-
-/**
- * \def ACTIVATE_AUTO_SHUTDOWN
- * Will automatically shot of system if no radio activity
- */
-//#define ACTIVATE_AUTO_SHUTDOWN
 
 /**
  * \def ACTIVATE_STARTUP_SOUND
