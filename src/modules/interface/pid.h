@@ -40,10 +40,18 @@
 #define PID_PITCH_RATE_KD  2.5
 #define PID_PITCH_RATE_INTEGRATION_LIMIT   33.3
 
-#define PID_YAW_RATE_KP  40.0 // modded
-#define PID_YAW_RATE_KI  3.0 // modded
-#define PID_YAW_RATE_KD  0.0
-#define PID_YAW_RATE_INTEGRATION_LIMIT     33.3 // modded
+#ifndef PID_YAW_RATE_KP
+  #define PID_YAW_RATE_KP  40.0 // modded
+#endif
+#ifndef PID_YAW_RATE_KI
+  #define PID_YAW_RATE_KI  3.0 // modded
+#endif
+#ifndef PID_YAW_RATE_KD
+  #define PID_YAW_RATE_KD  0.0
+#endif
+#ifndef PID_YAW_RATE_INTEGRATION_LIMIT
+  #define PID_YAW_RATE_INTEGRATION_LIMIT     33.3 // modded
+#endif
 
 #define PID_ROLL_KP  6.0
 #define PID_ROLL_KI  3.0

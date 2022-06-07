@@ -115,6 +115,23 @@ endif
 
 ## Weight of the Crazyflie, including decks. The default setting is a Crazyflie 2.X without decks.
 ARCH_CFLAGS += -DCF_MASS=0.048f # modded
+# hack because Kconfig does not support float but the PIDs are floats
+ifneq ($(CONFIG_PID_YAW_RATE_KP),)
+unquoted_yp = $(patsubst "%",%,$(CONFIG_PID_YAW_RATE_KP))
+ARCH_CFLAGS += -DPID_YAW_RATE_KP=$(unquoted_yp)
+endif
+ifneq ($(CONFIG_PID_YAW_RATE_KI),)
+unquoted_yi = $(patsubst "%",%,$(CONFIG_PID_YAW_RATE_KI))
+ARCH_CFLAGS += -DPID_YAW_RATE_KI=$(unquoted_yi)
+endif
+ifneq ($(CONFIG_PID_YAW_RATE_KD),)
+unquoted_yd = $(patsubst "%",%,$(CONFIG_PID_YAW_RATE_KD))
+ARCH_CFLAGS += -DPID_YAW_RATE_KD=$(unquoted_yd)
+endif
+ifneq ($(CONFIG_PID_YAW_RATE_INTEGRATION_LIMIT),)
+unquoted_yi_lim = $(patsubst "%",%,$(CONFIG_PID_YAW_RATE_INTEGRATION_LIMIT))
+ARCH_CFLAGS += -DPID_YAW_RATE_INTEGRATION_LIMIT=$(unquoted_yi_lim)
+endif
 
 _all:
 
@@ -122,7 +139,6 @@ all: $(PROG).hex $(PROG).bin
 	@echo "Build for the $(PLATFORM)!"
 	@$(PYTHON) $(srctree)/tools/make/versionTemplate.py --crazyflie-base $(srctree) --print-version
 	@$(PYTHON) $(srctree)/tools/make/size.py $(SIZE) $(PROG).elf $(MEM_SIZE_FLASH_K) $(MEM_SIZE_RAM_K) $(MEM_SIZE_CCM_K)
-
 	#
 	# Create symlinks to the ouput files in the build directory
 	#

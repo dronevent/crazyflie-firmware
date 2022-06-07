@@ -182,3 +182,20 @@ source src/deck/drivers/src/Kconfig
 endmenu
 
 source "src/modules/src/Kconfig"
+
+menu "PID configuration"
+
+config PID_YAW_RATE_KP
+    string "Yaw P"
+    default "40.0"
+config PID_YAW_RATE_KI
+    string "Yaw I"
+    default "3.0"
+config PID_YAW_RATE_KD
+    string "Yaw D"
+    default "0.0"
+config PID_YAW_RATE_INTEGRATION_LIMIT
+    string "Yaw integration_limit"
+    default "33.3"
+
+endmenu
