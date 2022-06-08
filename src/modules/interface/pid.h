@@ -23,6 +23,9 @@
  *
  *
  * pid.h - implementation of the PID regulator
+ * 
+ * moddified by dronevent
+ * DO NOT CHANGE THE PIDS IN THE DEFINES USE menuconfig maketarget
  */
 #ifndef PID_H_
 #define PID_H_
@@ -30,43 +33,83 @@
 #include <stdbool.h>
 #include "filter.h"
 
-#define PID_ROLL_RATE_KP  250.0
-#define PID_ROLL_RATE_KI  500.0
-#define PID_ROLL_RATE_KD  2.5
-#define PID_ROLL_RATE_INTEGRATION_LIMIT    33.3
+#ifndef PID_ROLL_RATE_KP
+  #define PID_ROLL_RATE_KP  250.0
+#endif
+#ifndef PID_ROLL_RATE_KI
+  #define PID_ROLL_RATE_KI  500.0
+#endif
+#ifndef PID_ROLL_RATE_KD
+  #define PID_ROLL_RATE_KD  2.5
+#endif
+#ifndef PID_ROLL_RATE_INTEGRATION_LIMIT
+  #define PID_ROLL_RATE_INTEGRATION_LIMIT    33.3
+#endif
 
-#define PID_PITCH_RATE_KP  250.0
-#define PID_PITCH_RATE_KI  500.0
-#define PID_PITCH_RATE_KD  2.5
-#define PID_PITCH_RATE_INTEGRATION_LIMIT   33.3
+#ifndef PID_PITCH_RATE_KP
+  #define PID_PITCH_RATE_KP  250.0
+#endif
+#ifndef PID_PITCH_RATE_KI
+  #define PID_PITCH_RATE_KI  500.0
+#endif
+#ifndef PID_PITCH_RATE_KD
+  #define PID_PITCH_RATE_KD  2.5
+#endif
+#ifndef PID_PITCH_RATE_INTEGRATION_LIMIT
+  #define PID_PITCH_RATE_INTEGRATION_LIMIT   33.3
+#endif
 
 #ifndef PID_YAW_RATE_KP
-  #define PID_YAW_RATE_KP  40.0 // modded
+  #define PID_YAW_RATE_KP  40.0
 #endif
 #ifndef PID_YAW_RATE_KI
-  #define PID_YAW_RATE_KI  3.0 // modded
+  #define PID_YAW_RATE_KI  3.0 
 #endif
 #ifndef PID_YAW_RATE_KD
   #define PID_YAW_RATE_KD  0.0
 #endif
 #ifndef PID_YAW_RATE_INTEGRATION_LIMIT
-  #define PID_YAW_RATE_INTEGRATION_LIMIT     33.3 // modded
+  #define PID_YAW_RATE_INTEGRATION_LIMIT     33.3
 #endif
 
-#define PID_ROLL_KP  6.0
-#define PID_ROLL_KI  3.0
-#define PID_ROLL_KD  0.0
-#define PID_ROLL_INTEGRATION_LIMIT    20.0
+#ifndef PID_ROLL_KP
+  #define PID_ROLL_KP  6.0
+#endif
+#ifndef PID_ROLL_KI
+  #define PID_ROLL_KI  3.0
+#endif
+#ifndef PID_ROLL_KD
+  #define PID_ROLL_KD  0.0
+#endif
+#ifndef PID_ROLL_INTEGRATION_LIMIT
+  #define PID_ROLL_INTEGRATION_LIMIT    20.0
+#endif
 
-#define PID_PITCH_KP  6.0
-#define PID_PITCH_KI  3.0
-#define PID_PITCH_KD  0.0
-#define PID_PITCH_INTEGRATION_LIMIT   20.0
+#ifndef PID_PITCH_KP
+  #define PID_PITCH_KP  6.0
+#endif
+#ifndef PID_PITCH_KI
+  #define PID_PITCH_KI  3.0
+#endif
+#ifndef PID_PITCH_KD
+  #define PID_PITCH_KD  0.0
+#endif
+#ifndef PID_PITCH_INTEGRATION_LIMIT
+  #define PID_PITCH_INTEGRATION_LIMIT   20.0
+#endif
 
-#define PID_YAW_KP  6.0
-#define PID_YAW_KI  1.0
-#define PID_YAW_KD  0.35
-#define PID_YAW_INTEGRATION_LIMIT     360.0
+#ifndef PID_YAW_KP
+  #define PID_YAW_KP  6.0
+#endif
+#ifndef PID_YAW_KI
+  #define PID_YAW_KI  1.0
+#endif
+#ifndef PID_YAW_KD
+  #define PID_YAW_KD  0.35
+#endif
+#ifndef PID_YAW_INTEGRATION_LIMIT
+  #define PID_YAW_INTEGRATION_LIMIT    360.0
+#endif
 
 
 #define DEFAULT_PID_INTEGRATION_LIMIT 5000.0

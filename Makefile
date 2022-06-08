@@ -115,7 +115,42 @@ endif
 
 ## Weight of the Crazyflie, including decks. The default setting is a Crazyflie 2.X without decks.
 ARCH_CFLAGS += -DCF_MASS=0.048f # modded
+
 # hack because Kconfig does not support float but the PIDs are floats
+ifneq ($(CONFIG_PID_ROLL_RATE_KP),)
+unquoted_rp = $(patsubst "%",%,$(CONFIG_PID_ROLL_RATE_KP))
+ARCH_CFLAGS += -DPID_ROLL_RATE_KP=$(unquoted_rp)
+endif
+ifneq ($(CONFIG_PID_ROLL_RATE_KI),)
+unquoted_ri = $(patsubst "%",%,$(CONFIG_PID_ROLL_RATE_KI))
+ARCH_CFLAGS += -DPID_ROLL_RATE_KI=$(unquoted_ri)
+endif
+ifneq ($(CONFIG_PID_ROLL_RATE_KD),)
+unquoted_rd = $(patsubst "%",%,$(CONFIG_PID_ROLL_RATE_KD))
+ARCH_CFLAGS += -DPID_ROLL_RATE_KD=$(unquoted_rd)
+endif
+ifneq ($(CONFIG_PID_ROLL_RATE_INTEGRATION_LIMIT),)
+unquoted_ri_lim = $(patsubst "%",%,$(CONFIG_PID_ROLL_RATE_INTEGRATION_LIMIT))
+ARCH_CFLAGS += -DPID_ROLL_RATE_INTEGRATION_LIMIT=$(unquoted_ri_lim)
+endif
+
+ifneq ($(CONFIG_PID_PITCH_RATE_KP),)
+unquoted_pp = $(patsubst "%",%,$(CONFIG_PID_PITCH_RATE_KP))
+ARCH_CFLAGS += -DPID_PITCH_RATE_KP=$(unquoted_pp)
+endif
+ifneq ($(CONFIG_PID_PITCH_RATE_KI),)
+unquoted_pi = $(patsubst "%",%,$(CONFIG_PID_PITCH_RATE_KI))
+ARCH_CFLAGS += -DPID_PITCH_RATE_KI=$(unquoted_pi)
+endif
+ifneq ($(CONFIG_PID_PITCH_RATE_KD),)
+unquoted_pd = $(patsubst "%",%,$(CONFIG_PID_PITCH_RATE_KD))
+ARCH_CFLAGS += -DPID_PITCH_RATE_KD=$(unquoted_pd)
+endif
+ifneq ($(CONFIG_PID_PITCH_RATE_INTEGRATION_LIMIT),)
+unquoted_pi_lim = $(patsubst "%",%,$(CONFIG_PID_PITCH_RATE_INTEGRATION_LIMIT))
+ARCH_CFLAGS += -DPID_PITCH_RATE_INTEGRATION_LIMIT=$(unquoted_pi_lim)
+endif
+
 ifneq ($(CONFIG_PID_YAW_RATE_KP),)
 unquoted_yp = $(patsubst "%",%,$(CONFIG_PID_YAW_RATE_KP))
 ARCH_CFLAGS += -DPID_YAW_RATE_KP=$(unquoted_yp)

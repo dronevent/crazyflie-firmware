@@ -185,17 +185,90 @@ source "src/modules/src/Kconfig"
 
 menu "PID configuration"
 
+menu "Attitude rate PID configuration"
+
+config PID_ROLL_RATE_KP
+    string "ROLL P"
+    default "250.0"
+config PID_ROLL_RATE_KI
+    string "ROLL I"
+    default "500.0"
+config PID_ROLL_RATE_KD
+    string "ROLL D"
+    default "2.5"
+config PID_ROLL_RATE_INTEGRATION_LIMIT
+    string "ROLL integration_limit"
+    default "33.3"
+
+config PID_PITCH_RATE_KP
+    string "PITCH P"
+    default "250.0"
+config PID_PITCH_RATE_KI
+    string "PITCH I"
+    default "500.0"
+config PID_PITCH_RATE_KD
+    string "PITCH D"
+    default "2.5"
+config PID_PITCH_RATE_INTEGRATION_LIMIT
+    string "PITCH integration_limit"
+    default "33.3"
+
 config PID_YAW_RATE_KP
-    string "Yaw P"
+    string "YAW P"
     default "40.0"
 config PID_YAW_RATE_KI
-    string "Yaw I"
+    string "YAW I"
     default "3.0"
 config PID_YAW_RATE_KD
-    string "Yaw D"
+    string "YAW D"
     default "0.0"
 config PID_YAW_RATE_INTEGRATION_LIMIT
-    string "Yaw integration_limit"
+    string "YAW integration_limit"
     default "33.3"
+    
+endmenu
+
+menu "Attitude PID configuration"
+
+config PID_ROLL_KP
+    string "ROLL P"
+    default "6.0"
+config PID_ROLL_KI
+    string "ROLL I"
+    default "3.0"
+config PID_ROLL_KD
+    string "ROLL D"
+    default "0.0"
+config PID_ROLL_INTEGRATION_LIMIT
+    string "ROLL integration_limit"
+    default "20.0"
+
+config PID_PITCH_KP
+    string "PITCH P"
+    default "6.0"
+config PID_PITCH_KI
+    string "PITCH I"
+    default "3.0"
+config PID_PITCH_KD
+    string "PITCH D"
+    default "0.0"
+config PID_PITCH_INTEGRATION_LIMIT
+    string "PITCH integration_limit"
+    default "20.0"
+
+config PID_YAW_KP
+    string "YAW P"
+    default "6.0"
+config PID_YAW_KI
+    string "YAW I"
+    default "1.0"
+config PID_YAW_KD
+    string "YAW D"
+    default "0.35"
+config PID_YAW_INTEGRATION_LIMIT
+    string "YAW integration_limit"
+    default "360.0"
+
+endmenu
 
 endmenu
